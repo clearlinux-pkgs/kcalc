@@ -6,17 +6,18 @@
 #
 Name     : kcalc
 Version  : 18.08.0
-Release  : 1
+Release  : 2
 URL      : https://download.kde.org/stable/applications/18.08.0/src/kcalc-18.08.0.tar.xz
 Source0  : https://download.kde.org/stable/applications/18.08.0/src/kcalc-18.08.0.tar.xz
 Source99 : https://download.kde.org/stable/applications/18.08.0/src/kcalc-18.08.0.tar.xz.sig
-Summary  : No detailed summary available
+Summary  : Scientific Calculator
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
-Requires: kcalc-bin
-Requires: kcalc-data
-Requires: kcalc-license
-Requires: kcalc-locales
+Requires: kcalc-bin = %{version}-%{release}
+Requires: kcalc-data = %{version}-%{release}
+Requires: kcalc-lib = %{version}-%{release}
+Requires: kcalc-license = %{version}-%{release}
+Requires: kcalc-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : gmp-dev
@@ -33,8 +34,8 @@ license can be found in a file named COPYING, in the toplevel directory.
 %package bin
 Summary: bin components for the kcalc package.
 Group: Binaries
-Requires: kcalc-data
-Requires: kcalc-license
+Requires: kcalc-data = %{version}-%{release}
+Requires: kcalc-license = %{version}-%{release}
 
 %description bin
 bin components for the kcalc package.
@@ -48,23 +49,22 @@ Group: Data
 data components for the kcalc package.
 
 
-%package dev
-Summary: dev components for the kcalc package.
-Group: Development
-Requires: kcalc-bin
-Requires: kcalc-data
-Provides: kcalc-devel
-
-%description dev
-dev components for the kcalc package.
-
-
 %package doc
 Summary: doc components for the kcalc package.
 Group: Documentation
 
 %description doc
 doc components for the kcalc package.
+
+
+%package lib
+Summary: lib components for the kcalc package.
+Group: Libraries
+Requires: kcalc-data = %{version}-%{release}
+Requires: kcalc-license = %{version}-%{release}
+
+%description lib
+lib components for the kcalc package.
 
 
 %package license
@@ -91,19 +91,19 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535170665
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1547424313
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535170665
+export SOURCE_DATE_EPOCH=1547424313
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kcalc
-cp COPYING %{buildroot}/usr/share/doc/kcalc/COPYING
-cp COPYING.LIB %{buildroot}/usr/share/doc/kcalc/COPYING.LIB
+mkdir -p %{buildroot}/usr/share/package-licenses/kcalc
+cp COPYING %{buildroot}/usr/share/package-licenses/kcalc/COPYING
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kcalc/COPYING.LIB
 pushd clr-build
 %make_install
 popd
@@ -124,10 +124,6 @@ popd
 /usr/share/kconf_update/kcalcrc.upd
 /usr/share/kxmlgui5/kcalc/kcalcui.rc
 /usr/share/metainfo/org.kde.kcalc.appdata.xml
-
-%files dev
-%defattr(-,root,root,-)
-/usr/lib64/libkdeinit5_kcalc.so
 
 %files doc
 %defattr(0644,root,root,0755)
@@ -177,10 +173,14 @@ popd
 /usr/share/doc/HTML/uk/kcalc/index.cache.bz2
 /usr/share/doc/HTML/uk/kcalc/index.docbook
 
-%files license
+%files lib
 %defattr(-,root,root,-)
-/usr/share/doc/kcalc/COPYING
-/usr/share/doc/kcalc/COPYING.LIB
+/usr/lib64/libkdeinit5_kcalc.so
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kcalc/COPYING
+/usr/share/package-licenses/kcalc/COPYING.LIB
 
 %files locales -f kcalc.lang
 %defattr(-,root,root,-)
