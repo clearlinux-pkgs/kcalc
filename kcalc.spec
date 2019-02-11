@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kcalc
-Version  : 18.08.0
-Release  : 2
-URL      : https://download.kde.org/stable/applications/18.08.0/src/kcalc-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/kcalc-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/kcalc-18.08.0.tar.xz.sig
-Summary  : Scientific Calculator
+Version  : 18.12.2
+Release  : 3
+URL      : https://download.kde.org/stable/applications/18.12.2/src/kcalc-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/kcalc-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/kcalc-18.12.2.tar.xz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
 Requires: kcalc-bin = %{version}-%{release}
@@ -21,9 +21,6 @@ Requires: kcalc-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : gmp-dev
-BuildRequires : kguiaddons-dev
-BuildRequires : kinit-dev
-BuildRequires : knotifications-dev
 
 %description
 KCalc
@@ -84,14 +81,14 @@ locales components for the kcalc package.
 
 
 %prep
-%setup -q -n kcalc-18.08.0
+%setup -q -n kcalc-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1547424313
+export SOURCE_DATE_EPOCH=1549863618
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -99,7 +96,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1547424313
+export SOURCE_DATE_EPOCH=1549863618
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kcalc
 cp COPYING %{buildroot}/usr/share/package-licenses/kcalc/COPYING
