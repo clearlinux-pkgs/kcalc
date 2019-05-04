@@ -6,7 +6,7 @@
 #
 Name     : kcalc
 Version  : 19.04.0
-Release  : 7
+Release  : 8
 URL      : https://download.kde.org/stable/applications/19.04.0/src/kcalc-19.04.0.tar.xz
 Source0  : https://download.kde.org/stable/applications/19.04.0/src/kcalc-19.04.0.tar.xz
 Source99 : https://download.kde.org/stable/applications/19.04.0/src/kcalc-19.04.0.tar.xz.sig
@@ -21,6 +21,9 @@ Requires: kcalc-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : gmp-dev
+BuildRequires : kguiaddons-dev
+BuildRequires : kinit-dev
+BuildRequires : knotifications-dev
 
 %description
 KCalc
@@ -88,15 +91,22 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555603953
+export SOURCE_DATE_EPOCH=1557003692
 mkdir -p clr-build
 pushd clr-build
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1555603953
+export SOURCE_DATE_EPOCH=1557003692
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kcalc
 cp COPYING %{buildroot}/usr/share/package-licenses/kcalc/COPYING
