@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kcalc
-Version  : 22.08.3
-Release  : 46
-URL      : https://download.kde.org/stable/release-service/22.08.3/src/kcalc-22.08.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/22.08.3/src/kcalc-22.08.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/22.08.3/src/kcalc-22.08.3.tar.xz.sig
+Version  : 22.12.0
+Release  : 47
+URL      : https://download.kde.org/stable/release-service/22.12.0/src/kcalc-22.12.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.12.0/src/kcalc-22.12.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.12.0/src/kcalc-22.12.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GPL-2.0
@@ -73,15 +73,15 @@ locales components for the kcalc package.
 
 
 %prep
-%setup -q -n kcalc-22.08.3
-cd %{_builddir}/kcalc-22.08.3
+%setup -q -n kcalc-22.12.0
+cd %{_builddir}/kcalc-22.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1667880721
+export SOURCE_DATE_EPOCH=1670536977
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -97,7 +97,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1667880721
+export SOURCE_DATE_EPOCH=1670536977
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kcalc
 cp %{_builddir}/kcalc-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kcalc/29fb05b49e12a380545499938c4879440bd8851e || :
@@ -121,6 +121,7 @@ popd
 /usr/share/applications/org.kde.kcalc.desktop
 /usr/share/config.kcfg/kcalc.kcfg
 /usr/share/kconf_update/kcalcrc.upd
+/usr/share/kglobalaccel/org.kde.kcalc.desktop
 /usr/share/metainfo/org.kde.kcalc.appdata.xml
 
 %files doc
@@ -167,6 +168,9 @@ popd
 /usr/share/doc/HTML/sr/kcalc/commands.docbook
 /usr/share/doc/HTML/sr/kcalc/index.cache.bz2
 /usr/share/doc/HTML/sr/kcalc/index.docbook
+/usr/share/doc/HTML/sr@latin/kcalc/commands.docbook
+/usr/share/doc/HTML/sr@latin/kcalc/index.cache.bz2
+/usr/share/doc/HTML/sr@latin/kcalc/index.docbook
 /usr/share/doc/HTML/sv/kcalc/commands.docbook
 /usr/share/doc/HTML/sv/kcalc/index.cache.bz2
 /usr/share/doc/HTML/sv/kcalc/index.docbook
